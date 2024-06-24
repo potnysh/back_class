@@ -1,0 +1,9 @@
+{
+  "extends": "@shelf/tsconfig/backend",
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "strict": false
+  },
+  "exclude": ["node_modules"],
+  "include": ["./"]
+}

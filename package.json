@@ -1,0 +1,44 @@
+{
+  "name": "back_class",
+  "version": "1.0.0",
+  "private": true,
+  "main": "app.ts",
+  "scripts": {
+    "dev": "nodemon ./app.js",
+    "start": "nodemon",
+    "build": "babel src --out-dir lib --extensions '.ts'"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "http-errors": "^2.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.6.2",
+    "mongoose": "^8.4.1",
+    "multer": "^1.4.5-lts.1",
+    "pdfjs-dist": "^4.3.136"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.24.6",
+    "@babel/core": "^7.24.6",
+    "@babel/preset-env": "^7.24.6",
+    "@shelf/babel-config": "^3.0.0",
+    "@shelf/tsconfig": "^0.1.0",
+    "@types/node": "^20.14.1",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  },
+  "babel": {
+    "extends": "@shelf/babel-config/backend"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}
