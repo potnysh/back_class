@@ -4,6 +4,8 @@ import jwt from "jsonwebtoken";
 
 export const signUp = async (req, res, next) => {
   const { name, email, password } = req.body;
+  console.log("body", req.body);
+  console.log("creds", name, email, password);
   if (!name || !email || !password) {
     return res
       .status(401)
@@ -80,7 +82,6 @@ export const getUsers = async (req, res) => {
   }
 };
 
-
 // export const promoteUser = async (req, res) => {
 //   const { id } = req.params;
 //   try {
@@ -136,14 +137,17 @@ export const deleteUser = async (req, res) => {
 };
 
 export const getSession = async (req, res, next) => {
-  const token = (req.headers.authorization || '').replace(/Bearer\s?/, '');
-  if(!token) return res.status(401).json({message: 'Ви не зареєстровані.'});
- jwt.verify(token, process.env.SECRET_KEY, async (err, user:any) => {
-    if(err) { 
+  const token = (req.headers.authorization || "").replace(/Bearer\s?/, "");
+  if (!token) return res.status(401).json({ message: "Ви не зареєстровані." });
+  jwt.verify(token, process.env.SECRET_KEY, async (err, user: any) => {
+    if (err) {
       console.log(err);
-      return res.status(403).json({ message: 'Токен неправильний, або прострочений.'})
-    };
-    const userSession = await User.findById(user.id);
-    return res.status(200).json({user:userSession});
-  })
-}
+      return res
+        .status(403)
+        .json({ message: "Токен неправильний, або прострочений." });
+    }
+    const userSession: any = await User.findById(user.id);
+    const { password, ...other } = userSession?._doc;
+    return res.status(200).json({ user: other });
+  });
+};
