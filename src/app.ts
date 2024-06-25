@@ -23,8 +23,8 @@ import {
   deleteUser,
   getSession,
   getUsers,
-  // lowerUser,
-  // promoteUser,
+  lowerUser,
+  promoteUser,
   signIn,
   signUp,
 } from "./controllers/auth";
@@ -37,8 +37,8 @@ function getAuthRouter() {
   router.post("/signup", signUp);
   router.post("/signin", signIn);
   router.get("/", getUsers);
-  // router.post("/promote/:id", verifyToken, promoteUser);
-  // router.post("/low/:id", verifyToken, lowerUser);
+  router.post("/promote/:id", verifyToken, promoteUser);
+  router.post("/low/:id", verifyToken, lowerUser);
   router.delete("/delete/:id", verifyToken, deleteUser);
 
   return router;
@@ -50,11 +50,11 @@ function getMainChapterRouter() {
   router.get("/", getMainChapter);
   router.get("/:id", getMainChapterById);
   router.post("/", verifyToken, createMainChapter);
-  router.post("/update/:id", updateMainChapter);
-  router.delete("/:id", deleteMainChapterById);
-  router.post("/createSubChapter/:id", createSubChapter);
-  router.post("/deleteSubChapter/:id/:subchapterId", deleteSubChapter);
-  router.post("/updateSubChapter/:id/:subchapterId", updateSubChapterById);
+  router.post("/update/:id", verifyToken, updateMainChapter);
+  router.delete("/:id", verifyToken, deleteMainChapterById);
+  router.post("/createSubChapter/:id", verifyToken, createSubChapter);
+  router.post("/deleteSubChapter/:id/:subchapterId", verifyToken, deleteSubChapter);
+  router.post("/updateSubChapter/:id/:subchapterId", verifyToken, updateSubChapterById);
 
   return router;
 }
